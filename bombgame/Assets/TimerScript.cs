@@ -31,7 +31,8 @@ public class TimerScript : MonoBehaviour
                 {
                     text.text = "00:00";
                     // DIE
-                    GameObject.FindGameObjectWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                    //GameObject.FindGameObjectWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                    GameObject.FindGameObjectWithTag("Controller").GetComponent<GameController>().GameOver();
                     explodedYet = true;
                 }
 
