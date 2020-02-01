@@ -8,6 +8,7 @@ TagManager:
   - Explosion
   - LightController
   - Cube
+  - Timer
   layers:
   - Default
   - TransparentFX

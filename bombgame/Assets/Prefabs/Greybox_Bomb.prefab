@@ -312,7 +312,7 @@ MonoBehaviour:
   BottomDone: 0
   ButtonPrefab: {fileID: 6211801487735350687, guid: 00ac54b0a32042345a7af6d020135e9f,
     type: 3}
-  DeathButtonPrefab: {fileID: 2501437215377969268, guid: 779e924d0dff71f409c5acae79a8994f,
+  DeathButtonPrefab: {fileID: 6211801487735350687, guid: 8063058617082184ab30be937d2236af,
     type: 3}
   CubeFinished: 0
   Spawned: 0
@@ -517,16 +517,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8799477318385459517}
     m_Modifications:
-    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
-        type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6334584076281916707, guid: ff6b77cfede4acd4a9d5d55034938b20,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -581,6 +571,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff6b77cfede4acd4a9d5d55034938b20, type: 3}
