@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Spawner
   - Explosion
+  - LightController
+  - Cube
   layers:
   - Default
   - TransparentFX
