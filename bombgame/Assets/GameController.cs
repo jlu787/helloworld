@@ -12,13 +12,16 @@ public class GameController : MonoBehaviour
     public int highScore;
     public GameObject monitorLight;
     public GameObject timerObj;
+    public GameObject highScoreObj;
     public AudioSource bgm;
+    public TextMesh highscoreTM;
 
     // Start is called before the first frame update
     void Start()
     {
         highScore = PlayerPrefs.GetInt("highscore");
         timerObj.SetActive(false);
+        highScoreObj.SetActive(false);
         StartCoroutine(WaitForMonitorDisplayLight());
         bgm.Play();
     }
@@ -33,8 +36,9 @@ public class GameController : MonoBehaviour
             monitorAnim.SetBool("Activate", false);
             StartCoroutine(WaitForMonitor());
             monitorLight.SetActive(false);
-
         }
+        highscoreTM.text = currentScore.ToString();
+
     }
 
     IEnumerator WaitForMonitorDisplayLight()
@@ -47,14 +51,23 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.75f);
         GameObject.FindGameObjectWithTag("Spawner").GetComponent<SpawnCube>().SpawnNewCube();
-        timerObj.SetActive(true);
+        //timerObj.SetActive(true);
+        //highScoreObj.SetActive(true);
+        StartCoroutine(StartTimers());
+    }
 
+    IEnumerator StartTimers()
+    {
+        yield return new WaitForSeconds(0.5f);
+        timerObj.SetActive(true);
+        timerObj.GetComponent<TimerScript>().Reset();
+        highScoreObj.SetActive(true);
     }
 
     public void GameOver()
     {
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-        GameObject.FindGameObjectWithTag("Cube").SetActive(false);
+        Destroy(GameObject.FindGameObjectWithTag("Cube"));
         GameObject.FindGameObjectWithTag("Timer").SetActive(false);
 
         // get high score
@@ -68,8 +81,17 @@ public class GameController : MonoBehaviour
     IEnumerator WaitForExplosion()
     {
         yield return new WaitForSeconds(4.5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+
+        // resetting stuff
+        monitorAnim.SetBool("Activate", true);
+        highScoreObj.SetActive(false);
+        currentScore = 0;
+        playingGame = false;
+        highScore = PlayerPrefs.GetInt("highscore");
+        StartCoroutine(WaitForMonitorDisplayLight());
+        //bgm.Play();
     }
 
 
