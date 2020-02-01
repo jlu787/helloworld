@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082e2cdb51bd7f14e86f962fda607ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paused: 0
   timePerRound: 10
   seconds: 0
   deciseconds: 0

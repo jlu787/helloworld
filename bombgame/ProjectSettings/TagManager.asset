@@ -9,6 +9,7 @@ TagManager:
   - LightController
   - Cube
   - Timer
+  - Controller
   layers:
   - Default
   - TransparentFX
