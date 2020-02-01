@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public int highScore;
     public GameObject monitorLight;
     public GameObject timerObj;
+    public AudioSource bgm;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
         highScore = PlayerPrefs.GetInt("highscore");
         timerObj.SetActive(false);
         StartCoroutine(WaitForMonitorDisplayLight());
+        bgm.Play();
     }
 
     // Update is called once per frame
