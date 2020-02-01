@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 6551974864869528190}
   m_Layer: 0
   m_Name: Greybox_Bomb
-  m_TagString: Untagged
+  m_TagString: Cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

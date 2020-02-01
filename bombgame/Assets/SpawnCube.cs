@@ -5,9 +5,16 @@ using UnityEngine;
 public class SpawnCube : MonoBehaviour
 {
     public GameObject CubePrefab;
+    //public GameObject lightController;
+    GameObject lightController;
+
+     void Start()
+    {
+        lightController = GameObject.FindGameObjectWithTag("LightController");
+    }
 
     public void SpawnNewCube()
     {
-        Instantiate(CubePrefab);
+        lightController.GetComponent<LightScript>().NewCubeSpawned(Instantiate(CubePrefab));
     }
 }

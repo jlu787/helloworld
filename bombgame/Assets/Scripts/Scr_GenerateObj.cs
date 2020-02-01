@@ -266,6 +266,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 CubeFinished = true;
                 transform.DOMoveX(-1, 1.25f);
                 GameObject.FindWithTag("Spawner").GetComponent<SpawnCube>().SpawnNewCube();
+                GameObject.FindWithTag("LightController").GetComponent<LightScript>().CubeComplete();
                 StartCoroutine(DestroySelf());
                 Spawned = true;
             }
