@@ -44,7 +44,7 @@ public class Scr_GenerateObj : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !CubeFinished)
         {
             // check current face
             switch(rotateScript.currentFace)
@@ -54,6 +54,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     {
                         Debug.Log("YOU DEAD");
                         GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+
                     }
                     else if (faces[Front] == FaceType.BUTTON)
                     FrontFace.GetComponent<ButtonPress>().Press();
@@ -63,6 +65,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     {
                         Debug.Log("YOU DEAD");
                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+
 
                     }
                     else if (faces[Back] == FaceType.BUTTON)
@@ -73,6 +77,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     {
                         Debug.Log("YOU DEAD");
                         GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+
 
                     }
                     else if (faces[Right] == FaceType.BUTTON)
@@ -83,6 +89,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     {
                         Debug.Log("YOU DEAD");
                         GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+
 
                     }
                     else if (faces[Left] == FaceType.BUTTON)
@@ -93,6 +101,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     {
                         Debug.Log("YOU DEAD");
                         GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+
 
                     }
                     else if (faces[Top] == FaceType.BUTTON)
@@ -103,6 +113,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     {
                         Debug.Log("YOU DEAD");
                         GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+
 
                     }
                     else if (faces[Bot] == FaceType.BUTTON)
@@ -263,10 +275,12 @@ public class Scr_GenerateObj : MonoBehaviour
         {
             if (!Spawned)
             {
+
                 CubeFinished = true;
                 transform.DOMoveX(-1, 1.25f);
                 GameObject.FindWithTag("Spawner").GetComponent<SpawnCube>().SpawnNewCube();
                 GameObject.FindWithTag("LightController").GetComponent<LightScript>().CubeComplete();
+                GameObject.FindWithTag("Timer").GetComponent<TimerScript>().BombSet();
                 StartCoroutine(DestroySelf());
                 Spawned = true;
             }
