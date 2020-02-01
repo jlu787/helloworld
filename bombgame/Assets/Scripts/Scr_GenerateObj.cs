@@ -20,8 +20,12 @@ public class Scr_GenerateObj : MonoBehaviour
     public bool CubeFinished = false;
     public bool Spawned = false;
 
+    //public AudioSource explodeSound;
+    public AudioSource wooshSound;
+    
+
     // decide what goes on each face
-    FaceType[] faces = new FaceType[6]; // f,b,l,r,t,bot
+    public FaceType[] faces = new FaceType[6]; // f,b,l,r,t,bot
 
     const int Front = 0;
     const int Back = 1;
@@ -49,6 +53,7 @@ public class Scr_GenerateObj : MonoBehaviour
                     if (faces[Front] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
+                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
                     }
                     else if (faces[Front] == FaceType.BUTTON)
                     FrontFace.GetComponent<ButtonPress>().Press();
@@ -57,6 +62,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     if (faces[Back] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
+                       GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+
                     }
                     else if (faces[Back] == FaceType.BUTTON)
                         BackFace.GetComponent<ButtonPress>().Press();
@@ -65,6 +72,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     if (faces[Right] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
+                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+
                     }
                     else if (faces[Right] == FaceType.BUTTON)
                         RightFace.GetComponent<ButtonPress>().Press();
@@ -73,6 +82,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     if (faces[Left] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
+                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+
                     }
                     else if (faces[Left] == FaceType.BUTTON)
                         LeftFace.GetComponent<ButtonPress>().Press();
@@ -81,6 +92,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     if (faces[Top] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
+                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+
                     }
                     else if (faces[Top] == FaceType.BUTTON)
                         TopFace.GetComponent<ButtonPress>().Press();
@@ -89,6 +102,8 @@ public class Scr_GenerateObj : MonoBehaviour
                     if (faces[Bot] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
+                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+
                     }
                     else if (faces[Bot] == FaceType.BUTTON)
                         BottomFace.GetComponent<ButtonPress>().Press();
@@ -150,7 +165,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 BackFace = Instantiate(ButtonPrefab, BackFace.transform);
                 break;
             case FaceType.DEATH:
-                BackFace = Instantiate(DeathButtonPrefab, FrontFace.transform);
+                BackFace = Instantiate(DeathButtonPrefab, BackFace.transform);
                 BackDone = true;
 
                 break;
@@ -166,7 +181,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 break;
 
             case FaceType.DEATH:
-                LeftFace = Instantiate(DeathButtonPrefab, FrontFace.transform);
+                LeftFace = Instantiate(DeathButtonPrefab, LeftFace.transform);
                 LeftDone = true;
 
                 break;
@@ -182,7 +197,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 break;
 
             case FaceType.DEATH:
-                RightFace = Instantiate(DeathButtonPrefab, FrontFace.transform);
+                RightFace = Instantiate(DeathButtonPrefab, RightFace.transform);
                 RightDone = true;
                 break;
         }
@@ -195,7 +210,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 TopFace = Instantiate(ButtonPrefab, TopFace.transform);
                 break;
             case FaceType.DEATH:
-                TopFace = Instantiate(DeathButtonPrefab, FrontFace.transform);
+                TopFace = Instantiate(DeathButtonPrefab, TopFace.transform);
                 TopDone = true;
                 break;
         }
@@ -209,7 +224,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 BottomFace = Instantiate(ButtonPrefab, BottomFace.transform);
                 break;
             case FaceType.DEATH:
-                BottomFace = Instantiate(DeathButtonPrefab, FrontFace.transform);
+                BottomFace = Instantiate(DeathButtonPrefab, BottomFace.transform);
                 BottomDone = true;
                 break;
         }
