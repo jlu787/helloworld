@@ -5,7 +5,7 @@ using UnityEngine;
 public class TimerScript : MonoBehaviour
 {
     public bool paused = false;
-    public float timePerRound = 60;
+    public float timePerRound = 10;
     public float seconds;
     public float deciseconds = 0;
     public TextMesh text;
@@ -65,6 +65,15 @@ public class TimerScript : MonoBehaviour
             }
         }
       
+    }
+
+    public void Reset()
+    {
+        explodedYet = false;
+        seconds = timePerRound;
+        deciseconds = 0.0f;
+        text.text = ((int)timePerRound).ToString();
+        paused = false;
     }
 
     // increase seconds by this much when a bomb is set
