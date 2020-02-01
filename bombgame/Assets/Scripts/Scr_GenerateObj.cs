@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Scr_GenerateObj : MonoBehaviour
 {
@@ -9,17 +10,19 @@ public class Scr_GenerateObj : MonoBehaviour
         BLANK = 0,
         BUTTON,       
     }
-
+    public GameObject newCube;
     public Scr_Rotate rotateScript;
     public GameObject FrontFace = null, BackFace = null, RightFace = null, LeftFace = null, TopFace = null, BottomFace = null;
     public bool FrontDone, BackDone, RightDone, LeftDone, TopDone, BottomDone;
     public GameObject ButtonPrefab;
     public bool CubeFinished = false;
+    public bool Spawned = false;
 
     // Start is called before the first frame update
     void Start()
     {
         RandomiseFaces();
+        transform.DOMoveX(0, 1.0f);
     }
 
     // Update is called once per frame
@@ -161,6 +164,19 @@ public class Scr_GenerateObj : MonoBehaviour
         if (TopDone && BottomDone && RightDone && LeftDone && FrontDone && BackDone)
         {
             CubeFinished = true;
+            transform.DOMoveX(-1, 1.25f);
+            if (!Spawned)
+            {
+                GameObject.FindWithTag("Spawner").GetComponent<SpawnCube>().SpawnNewCube();
+                StartCoroutine(DestroySelf());
+                Spawned = true;
+            }
         }
+    }
+
+    IEnumerator DestroySelf()
+    {
+        Destroy(gameObject, 1.0f);
+        yield return null;
     }
 }
