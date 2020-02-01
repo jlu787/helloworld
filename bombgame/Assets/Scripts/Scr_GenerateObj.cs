@@ -52,10 +52,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 case Scr_Rotate.Faces.FRONT:
                     if (faces[Front] == FaceType.DEATH)
                     {
-                        Debug.Log("YOU DEAD");
-                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
-
+                        CubeExplode();
                     }
                     else if (faces[Front] == FaceType.BUTTON)
                     FrontFace.GetComponent<ButtonPress>().Press();
@@ -63,11 +60,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 case Scr_Rotate.Faces.BACK:
                     if (faces[Back] == FaceType.DEATH)
                     {
-                        Debug.Log("YOU DEAD");
-                       GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
-
-
+                        CubeExplode();
                     }
                     else if (faces[Back] == FaceType.BUTTON)
                         BackFace.GetComponent<ButtonPress>().Press();
@@ -75,11 +68,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 case Scr_Rotate.Faces.RIGHT:
                     if (faces[Right] == FaceType.DEATH)
                     {
-                        Debug.Log("YOU DEAD");
-                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
-
-
+                        CubeExplode();
                     }
                     else if (faces[Right] == FaceType.BUTTON)
                         RightFace.GetComponent<ButtonPress>().Press();
@@ -87,11 +76,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 case Scr_Rotate.Faces.LEFT:
                     if (faces[Left] == FaceType.DEATH)
                     {
-                        Debug.Log("YOU DEAD");
-                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
-
-
+                        CubeExplode();
                     }
                     else if (faces[Left] == FaceType.BUTTON)
                         LeftFace.GetComponent<ButtonPress>().Press();
@@ -99,11 +84,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 case Scr_Rotate.Faces.TOP:
                     if (faces[Top] == FaceType.DEATH)
                     {
-                        Debug.Log("YOU DEAD");
-                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
-
-
+                        CubeExplode();
                     }
                     else if (faces[Top] == FaceType.BUTTON)
                         TopFace.GetComponent<ButtonPress>().Press();
@@ -111,11 +92,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 case Scr_Rotate.Faces.BOTTOM:
                     if (faces[Bot] == FaceType.DEATH)
                     {
-                        Debug.Log("YOU DEAD");
-                        GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-                        GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
-
-
+                        CubeExplode();
                     }
                     else if (faces[Bot] == FaceType.BUTTON)
                         BottomFace.GetComponent<ButtonPress>().Press();
@@ -126,6 +103,16 @@ public class Scr_GenerateObj : MonoBehaviour
 
         CheckDone();
       
+    }
+
+    private void CubeExplode()
+    {
+        //gameObject.SetActive(false);
+        //GameObject.FindWithTag("Timer").SetActive(false);
+        Debug.Log("YOU DEAD");
+        //GameObject.FindWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
+        //GameObject.FindWithTag("Timer").GetComponent<TimerScript>().paused = true;
+        GameObject.FindWithTag("Controller").GetComponent<GameController>().GameOver();
     }
 
     private void RandomiseFaces()
@@ -281,6 +268,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 GameObject.FindWithTag("Spawner").GetComponent<SpawnCube>().SpawnNewCube();
                 GameObject.FindWithTag("LightController").GetComponent<LightScript>().CubeComplete();
                 GameObject.FindWithTag("Timer").GetComponent<TimerScript>().BombSet();
+                GameObject.FindWithTag("Controller").GetComponent<GameController>().currentScore++;
                 StartCoroutine(DestroySelf());
                 Spawned = true;
             }
