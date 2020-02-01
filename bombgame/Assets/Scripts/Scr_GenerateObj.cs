@@ -21,7 +21,14 @@ public class Scr_GenerateObj : MonoBehaviour
     public bool Spawned = false;
 
     // decide what goes on each face
-    FaceType front, back, left, right, top, bottom;
+    FaceType[] faces = new FaceType[6]; // f,b,l,r,t,bot
+
+    const int Front = 0;
+    const int Back = 1;
+    const int Left = 2;
+    const int Right = 3;
+    const int Top = 4;
+    const int Bot = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -39,51 +46,51 @@ public class Scr_GenerateObj : MonoBehaviour
             switch(rotateScript.currentFace)
             {
                 case Scr_Rotate.Faces.FRONT:
-                    if (front == FaceType.DEATH)
+                    if (faces[Front] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
                     }
-                    else if (front == FaceType.BUTTON)
+                    else if (faces[Front] == FaceType.BUTTON)
                     FrontFace.GetComponent<ButtonPress>().Press();
                     break;
                 case Scr_Rotate.Faces.BACK:
-                    if (back == FaceType.DEATH)
+                    if (faces[Back] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
                     }
-                    else if (back == FaceType.BUTTON)
+                    else if (faces[Back] == FaceType.BUTTON)
                         BackFace.GetComponent<ButtonPress>().Press();
                     break;
                 case Scr_Rotate.Faces.RIGHT:
-                    if (right == FaceType.DEATH)
+                    if (faces[Right] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
                     }
-                    else if (right == FaceType.BUTTON)
+                    else if (faces[Right] == FaceType.BUTTON)
                         RightFace.GetComponent<ButtonPress>().Press();
                     break;
                 case Scr_Rotate.Faces.LEFT:
-                    if (left == FaceType.DEATH)
+                    if (faces[Left] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
                     }
-                    else if (left == FaceType.BUTTON)
+                    else if (faces[Left] == FaceType.BUTTON)
                         LeftFace.GetComponent<ButtonPress>().Press();
                     break;
                 case Scr_Rotate.Faces.TOP:
-                    if (top == FaceType.DEATH)
+                    if (faces[Top] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
                     }
-                    else if (top == FaceType.BUTTON)
+                    else if (faces[Top] == FaceType.BUTTON)
                         TopFace.GetComponent<ButtonPress>().Press();
                     break;
                 case Scr_Rotate.Faces.BOTTOM:
-                    if (bottom == FaceType.DEATH)
+                    if (faces[Bot] == FaceType.DEATH)
                     {
                         Debug.Log("YOU DEAD");
                     }
-                    else if (bottom == FaceType.BUTTON)
+                    else if (faces[Bot] == FaceType.BUTTON)
                         BottomFace.GetComponent<ButtonPress>().Press();
                     break;
             }
@@ -96,14 +103,31 @@ public class Scr_GenerateObj : MonoBehaviour
 
     private void RandomiseFaces()
     {
-        front = (FaceType)Random.Range(0, 3);
-        back = (FaceType)Random.Range(0, 3);
-        left = (FaceType)Random.Range(0, 3);
-        right = (FaceType)Random.Range(0, 3);
-        top = (FaceType)Random.Range(0, 3);
-        bottom = (FaceType)Random.Range(0, 3);
+        // check how many buttons there are
+        int buttons = 0;
 
-        switch (front)
+        for (int i = 0; i < 6; i++)
+        {
+            faces[i] = (FaceType)Random.Range(0, 3);
+
+            if (faces[i] == FaceType.BUTTON)
+            {
+                buttons++;
+            }
+        }
+
+       while(buttons < 2)
+        {
+            int randomFace = Random.Range(0, 6);
+            if (faces[randomFace] != FaceType.BUTTON)
+            {
+                faces[randomFace] = FaceType.BUTTON;
+                buttons++;
+            }
+        }
+
+
+        switch (faces[Front])
         {
             case FaceType.BLANK:
                 FrontDone = true;
@@ -116,7 +140,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 FrontDone = true;
                 break;
         }
-        switch (back)
+        switch (faces[Back])
         {
             case FaceType.BLANK:
                 BackDone = true;
@@ -131,7 +155,7 @@ public class Scr_GenerateObj : MonoBehaviour
 
                 break;
         }
-        switch (left)
+        switch (faces[Left])
         {
             case FaceType.BLANK:
                 LeftDone = true;
@@ -147,7 +171,7 @@ public class Scr_GenerateObj : MonoBehaviour
 
                 break;
         }
-        switch (right)
+        switch (faces[Right])
         {
             case FaceType.BLANK:
                 RightDone = true;
@@ -162,7 +186,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 RightDone = true;
                 break;
         }
-        switch (top)
+        switch (faces[Top])
         {
             case FaceType.BLANK:
                 TopDone = true;
@@ -175,7 +199,7 @@ public class Scr_GenerateObj : MonoBehaviour
                 TopDone = true;
                 break;
         }
-        switch (bottom)
+        switch (faces[Bot])
         {
             case FaceType.BLANK:
                 BottomDone = true;
