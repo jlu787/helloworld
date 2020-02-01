@@ -10,8 +10,11 @@ public class Scr_GenerateObj : MonoBehaviour
         BUTTON,       
     }
 
-    public GameObject FrontFace, BackFace, RightFace, LeftFace, TopFace, BottomFace;
+    public Scr_Rotate rotateScript;
+    public GameObject FrontFace = null, BackFace = null, RightFace = null, LeftFace = null, TopFace = null, BottomFace = null;
+    public bool FrontDone, BackDone, RightDone, LeftDone, TopDone, BottomDone;
     public GameObject ButtonPrefab;
+    public bool CubeFinished = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +28,33 @@ public class Scr_GenerateObj : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // check current face
-
+            switch(rotateScript.currentFace)
+            {
+                case Scr_Rotate.Faces.FRONT:
+                    if (FrontFace != null)
+                    FrontFace.GetComponent<ButtonPress>().Press();
+                    break;
+                case Scr_Rotate.Faces.BACK:
+                    BackFace.GetComponent<ButtonPress>().Press();
+                    break;
+                case Scr_Rotate.Faces.RIGHT:
+                    RightFace.GetComponent<ButtonPress>().Press();
+                    break;
+                case Scr_Rotate.Faces.LEFT:
+                    LeftFace.GetComponent<ButtonPress>().Press();
+                    break;
+                case Scr_Rotate.Faces.TOP:
+                    TopFace.GetComponent<ButtonPress>().Press();
+                    break;
+                case Scr_Rotate.Faces.BOTTOM:
+                    BottomFace.GetComponent<ButtonPress>().Press();
+                    break;
+            }
         }
+
+
+        CheckDone();
+      
     }
 
     private void RandomiseFaces()
@@ -44,50 +72,95 @@ public class Scr_GenerateObj : MonoBehaviour
         switch (front)
         {
             case FaceType.BLANK:
+                FrontDone = true;
                 break;
             case FaceType.BUTTON:
-                Instantiate(ButtonPrefab, FrontFace.transform);
+                FrontFace = Instantiate(ButtonPrefab, FrontFace.transform);
                 break;
         }
         switch (back)
         {
             case FaceType.BLANK:
+                BackDone = true;
+
                 break;
             case FaceType.BUTTON:
-                Instantiate(ButtonPrefab, BackFace.transform);
+                BackFace = Instantiate(ButtonPrefab, BackFace.transform);
                 break;
         }
         switch (left)
         {
             case FaceType.BLANK:
+                LeftDone = true;
+
                 break;
             case FaceType.BUTTON:
-                Instantiate(ButtonPrefab, LeftFace.transform);
+                LeftFace = Instantiate(ButtonPrefab, LeftFace.transform);
                 break;
         }
         switch (right)
         {
             case FaceType.BLANK:
+                RightDone = true;
+
                 break;
             case FaceType.BUTTON:
-                Instantiate(ButtonPrefab, RightFace.transform);
+                RightFace = Instantiate(ButtonPrefab, RightFace.transform);
                 break;
         }
         switch (top)
         {
             case FaceType.BLANK:
+                TopDone = true;
                 break;
             case FaceType.BUTTON:
-                Instantiate(ButtonPrefab, TopFace.transform);
+                TopFace = Instantiate(ButtonPrefab, TopFace.transform);
                 break;
         }
         switch (bottom)
         {
             case FaceType.BLANK:
+                BottomDone = true;
+
                 break;
             case FaceType.BUTTON:
-                Instantiate(ButtonPrefab, BottomFace.transform);
+                BottomFace = Instantiate(ButtonPrefab, BottomFace.transform);
                 break;
+        }
+    }
+
+    // function checks which sides are done
+    private void CheckDone()
+    {
+        if (!TopDone)
+        {
+            TopDone = TopFace.GetComponent<ButtonPress>().pressed;
+        }
+        if (!BottomDone)
+        {
+            BottomDone = BottomFace.GetComponent<ButtonPress>().pressed;
+        }
+        if (!RightDone)
+        {
+            RightDone = RightFace.GetComponent<ButtonPress>().pressed;
+        }
+        if (!LeftDone)
+        {
+            LeftDone = LeftFace.GetComponent<ButtonPress>().pressed;
+        }
+        if (!FrontDone)
+        {
+            FrontDone = FrontFace.GetComponent<ButtonPress>().pressed;
+        }
+        if (!BackDone)
+        {
+            BackDone = BackFace.GetComponent<ButtonPress>().pressed;
+        }
+
+        // if all sides are complete then cube is finished
+        if (TopDone && BottomDone && RightDone && LeftDone && FrontDone && BackDone)
+        {
+            CubeFinished = true;
         }
     }
 }

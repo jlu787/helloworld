@@ -686,6 +686,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3791471455641098205}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2126516477650571533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2962493667067414224, guid: e25a6280358157949b574af4cc2aff8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3791471455641098205}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126516477650571532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 630bcbe25a60a304fb44106425052428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2126516477650571534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,14 +710,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f53b02182a3edc4e94bc62040a5ae67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateScript: {fileID: 2126516477650571533}
   FrontFace: {fileID: 1773372064}
   BackFace: {fileID: 605158043}
   RightFace: {fileID: 1684620954}
   LeftFace: {fileID: 1993179068}
   TopFace: {fileID: 1204962288}
   BottomFace: {fileID: 1752035761}
+  FrontDone: 0
+  BackDone: 0
+  RightDone: 0
+  LeftDone: 0
+  TopDone: 0
+  BottomDone: 0
   ButtonPrefab: {fileID: 6211801487735350687, guid: 00ac54b0a32042345a7af6d020135e9f,
     type: 3}
+  CubeFinished: 0
 --- !u!4 &2685987737184992388
 Transform:
   m_ObjectHideFlags: 0

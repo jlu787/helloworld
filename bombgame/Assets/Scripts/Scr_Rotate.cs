@@ -95,7 +95,7 @@ public class Scr_Rotate : MonoBehaviour
 
     void Update()
     {
-        const float rotationTime = .2f;
+        const float rotationTime = .1f;
         if (rotating)
         {
             rotationTimer += Time.deltaTime;
