@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Scr_Rotate : MonoBehaviour
 {
+
+    public AudioSource flipSound;
     public enum Faces
     {
         FRONT = 1,
@@ -114,24 +116,31 @@ public class Scr_Rotate : MonoBehaviour
         else
         {
             int rotation = -1;
+            
+
             if (Input.GetKeyDown("d"))
             {
+                //flipSound.Play();
                 rotation = 0;
             }
             else if (Input.GetKeyDown("a"))
             {
+                //flipSound.Play();
                 rotation = 1;
             }
             else if (Input.GetKeyDown("s"))
             {
+                //flipSound.Play();
                 rotation = 2;
             }
             else if (Input.GetKeyDown("w"))
             {
+                //flipSound.Play();
                 rotation = 3;
             }
             if (rotation != -1)
             {
+                flipSound.Play();
                 orientationIndex =
                     neighborIndices[orientationIndex, rotation];
                 orientation1 = transform.rotation;
