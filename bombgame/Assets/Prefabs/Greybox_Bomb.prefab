@@ -308,5 +308,7 @@ MonoBehaviour:
   BottomDone: 0
   ButtonPrefab: {fileID: 6211801487735350687, guid: 00ac54b0a32042345a7af6d020135e9f,
     type: 3}
+  DeathButtonPrefab: {fileID: 2501437215377969268, guid: 779e924d0dff71f409c5acae79a8994f,
+    type: 3}
   CubeFinished: 0
   Spawned: 0
