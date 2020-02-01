@@ -12,16 +12,25 @@ public class GameController : MonoBehaviour
     public int highScore;
     public GameObject monitorLight;
     public GameObject timerObj;
-    public GameObject highScoreObj;
+    public GameObject scoreObj;
+    public GameObject highscoreObj;
     public AudioSource bgm;
+    public TextMesh scoreTM;
     public TextMesh highscoreTM;
+    public GameObject playIcon;
+
+    private bool readyToStart = false;
+    private string highScoreStr;
 
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerPrefs.SetInt("highscore", 0);
         highScore = PlayerPrefs.GetInt("highscore");
+        //highscoreTM.text = highScore.ToString();
+        SetHighScore();
         timerObj.SetActive(false);
-        highScoreObj.SetActive(false);
+        scoreObj.SetActive(false);
         StartCoroutine(WaitForMonitorDisplayLight());
         bgm.Play();
     }
@@ -29,15 +38,17 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playingGame == false && Input.GetMouseButtonDown(0))
+        if (playingGame == false && Input.GetMouseButtonDown(0) && readyToStart)
         {
             playingGame = true;
             //monitor.SetActive(false);
             monitorAnim.SetBool("Activate", false);
-            StartCoroutine(WaitForMonitor());
+            StartCoroutine(WaitForMonitorToLeave());
+            playIcon.SetActive(false);
+            highscoreObj.SetActive(false);
             monitorLight.SetActive(false);
         }
-        highscoreTM.text = currentScore.ToString();
+        scoreTM.text = currentScore.ToString();
 
     }
 
@@ -45,9 +56,10 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         monitorLight.SetActive(true);
+        StartCoroutine(WaitForMonitorToStopBouncing());
     }
 
-    IEnumerator WaitForMonitor()
+    IEnumerator WaitForMonitorToLeave()
     {
         yield return new WaitForSeconds(1.75f);
         GameObject.FindGameObjectWithTag("Spawner").GetComponent<SpawnCube>().SpawnNewCube();
@@ -56,12 +68,20 @@ public class GameController : MonoBehaviour
         StartCoroutine(StartTimers());
     }
 
+    IEnumerator WaitForMonitorToStopBouncing()
+    {
+        yield return new WaitForSeconds(0.5f);
+        playIcon.SetActive(true);
+        highscoreObj.SetActive(true);
+        readyToStart = true;
+    }
+
     IEnumerator StartTimers()
     {
         yield return new WaitForSeconds(0.5f);
         timerObj.SetActive(true);
         timerObj.GetComponent<TimerScript>().Reset();
-        highScoreObj.SetActive(true);
+        scoreObj.SetActive(true);
     }
 
     public void GameOver()
@@ -86,12 +106,32 @@ public class GameController : MonoBehaviour
 
         // resetting stuff
         monitorAnim.SetBool("Activate", true);
-        highScoreObj.SetActive(false);
+        scoreObj.SetActive(false);
         currentScore = 0;
         playingGame = false;
+        readyToStart = false;
         highScore = PlayerPrefs.GetInt("highscore");
+        SetHighScore();
         StartCoroutine(WaitForMonitorDisplayLight());
         //bgm.Play();
+    }
+
+    void SetHighScore()
+    {
+        if (highScore.ToString().Length == 2)
+        {
+            highScoreStr = "0" + highScore.ToString();
+        }
+        else if (highScore.ToString().Length == 1)
+        {
+            highScoreStr = "00" + highScore.ToString();
+        }
+        else
+        {
+            highScoreStr = highScore.ToString();
+        }
+
+        highscoreTM.text = highScoreStr;
     }
 
 
