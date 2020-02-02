@@ -517,6 +517,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8799477318385459517}
     m_Modifications:
+    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
+        type: 3}
+      propertyPath: m_Name
+      value: Point Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6334584076281916707, guid: ff6b77cfede4acd4a9d5d55034938b20,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -572,15 +582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
+    - target: {fileID: 6334584076281916706, guid: ff6b77cfede4acd4a9d5d55034938b20,
         type: 3}
-      propertyPath: m_Name
-      value: Point Light
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334584076281916732, guid: ff6b77cfede4acd4a9d5d55034938b20,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_Range
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff6b77cfede4acd4a9d5d55034938b20, type: 3}
