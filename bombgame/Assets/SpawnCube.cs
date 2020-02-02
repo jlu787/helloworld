@@ -15,6 +15,9 @@ public class SpawnCube : MonoBehaviour
 
     public void SpawnNewCube()
     {
-        lightController.GetComponent<LightScript>().NewCubeSpawned(Instantiate(CubePrefab));
+        if(GameObject.FindGameObjectWithTag("Controller").GetComponent<GameController>().playingGame)
+        {
+            lightController.GetComponent<LightScript>().NewCubeSpawned(Instantiate(CubePrefab));
+        }
     }
 }
