@@ -1845,6 +1845,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6289254819471085038, guid: b4dfe2d9e708bd8499c5dabaad992e1a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6181930d178faa74ab00ad9ba816fec4, type: 2}
+    - target: {fileID: 6289254819471085038, guid: b4dfe2d9e708bd8499c5dabaad992e1a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6181930d178faa74ab00ad9ba816fec4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4dfe2d9e708bd8499c5dabaad992e1a, type: 3}
 --- !u!23 &4723519462802209155
@@ -2277,6 +2287,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1388809798}
     m_Modifications:
+    - target: {fileID: 562439845780672976, guid: 81b286a3d44d9914d81c6e841f8c7807,
+        type: 3}
+      propertyPath: m_Name
+      value: Monitor_Enter_anim
+      objectReference: {fileID: 0}
     - target: {fileID: 3572878254226187203, guid: 81b286a3d44d9914d81c6e841f8c7807,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2346,11 +2361,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 32.450676
-      objectReference: {fileID: 0}
-    - target: {fileID: 562439845780672976, guid: 81b286a3d44d9914d81c6e841f8c7807,
-        type: 3}
-      propertyPath: m_Name
-      value: Monitor_Enter_anim
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81b286a3d44d9914d81c6e841f8c7807, type: 3}
