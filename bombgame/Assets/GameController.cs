@@ -19,6 +19,11 @@ public class GameController : MonoBehaviour
     public TextMesh highscoreTM;
     public GameObject playIcon;
 
+    public float maxPitch = 2.0f;
+    public float minPitch = 1.0f;
+    public float timeToStartIncreasingPitch = 5.0f;
+
+
     private bool readyToStart = false;
     private string highScoreStr;
 
@@ -49,7 +54,7 @@ public class GameController : MonoBehaviour
             monitorLight.SetActive(false);
         }
         scoreTM.text = currentScore.ToString();
-
+        PitchController();
     }
 
     IEnumerator WaitForMonitorDisplayLight()
@@ -89,6 +94,9 @@ public class GameController : MonoBehaviour
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
         Destroy(GameObject.FindGameObjectWithTag("Cube"));
         GameObject.FindGameObjectWithTag("Timer").SetActive(false);
+        playingGame = false;
+        readyToStart = false;
+        bgm.pitch = 1.0f;
 
         // get high score
         if (currentScore > highScore)
@@ -108,8 +116,11 @@ public class GameController : MonoBehaviour
         monitorAnim.SetBool("Activate", true);
         scoreObj.SetActive(false);
         currentScore = 0;
-        playingGame = false;
-        readyToStart = false;
+        //playingGame = false;
+        //readyToStart = false;
+        //bgm.pitch = 1.0f;
+        timerObj.GetComponent<TimerScript>().Reset();
+
         highScore = PlayerPrefs.GetInt("highscore");
         SetHighScore();
         StartCoroutine(WaitForMonitorDisplayLight());
@@ -134,5 +145,16 @@ public class GameController : MonoBehaviour
         highscoreTM.text = highScoreStr;
     }
 
+    void PitchController()
+    {
+        if (playingGame && timerObj.GetComponent<TimerScript>().seconds < 5)
+        {
+            bgm.pitch = (maxPitch - ((maxPitch - minPitch) / timeToStartIncreasingPitch) * (timerObj.GetComponent<TimerScript>().seconds + (timerObj.GetComponent<TimerScript>().deciseconds*0.01f)));
+        }
+        else
+        {
+            bgm.pitch = 1.0f;
+        }
+    }
 
 }
