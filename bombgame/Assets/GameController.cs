@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameController : MonoBehaviour
 {
@@ -19,13 +20,23 @@ public class GameController : MonoBehaviour
     public TextMesh highscoreTM;
     public GameObject playIcon;
 
+    public GameObject[] redLights;
+    public GameObject[] greenLights;
+
     public float maxPitch = 2.0f;
     public float minPitch = 1.0f;
     public float timeToStartIncreasingPitch = 5.0f;
+    public float maxPeriod = 150.0f;
+    public float minperiod = 10.0f;
+    public float periodScale;
+
 
 
     private bool readyToStart = false;
     private string highScoreStr;
+
+    public AudioSource monitorSound;
+    public AudioSource monitorReversed;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +49,9 @@ public class GameController : MonoBehaviour
         scoreObj.SetActive(false);
         StartCoroutine(WaitForMonitorDisplayLight());
         bgm.Play();
+        monitorSound.Play();
+        periodScale = minperiod;
+
     }
 
     // Update is called once per frame
@@ -52,6 +66,8 @@ public class GameController : MonoBehaviour
             playIcon.SetActive(false);
             highscoreObj.SetActive(false);
             monitorLight.SetActive(false);
+            //monitorSound.Play();
+            monitorReversed.Play();
         }
         scoreTM.text = currentScore.ToString();
         PitchController();
@@ -92,11 +108,21 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         GameObject.FindGameObjectWithTag("Explosion").GetComponent<ExplodeScript>().Explode();
-        Destroy(GameObject.FindGameObjectWithTag("Cube"));
-        GameObject.FindGameObjectWithTag("Timer").SetActive(false);
+
+        // Destroy all cubes
+        GameObject[] cubes;
+        cubes = GameObject.FindGameObjectsWithTag("Cube");
+        for(int i =0; i < cubes.Length; i++)
+        {
+            Destroy(cubes[i]);
+        }
+
+        timerObj.SetActive(false);
+        //GameObject.FindGameObjectWithTag("Timer").SetActive(false);
         playingGame = false;
         readyToStart = false;
         bgm.pitch = 1.0f;
+        periodScale = minperiod;
 
         // get high score
         if (currentScore > highScore)
@@ -114,6 +140,7 @@ public class GameController : MonoBehaviour
 
         // resetting stuff
         monitorAnim.SetBool("Activate", true);
+        monitorSound.Play();
         scoreObj.SetActive(false);
         currentScore = 0;
         //playingGame = false;
@@ -150,11 +177,27 @@ public class GameController : MonoBehaviour
         if (playingGame && timerObj.GetComponent<TimerScript>().seconds < 5)
         {
             bgm.pitch = (maxPitch - ((maxPitch - minPitch) / timeToStartIncreasingPitch) * (timerObj.GetComponent<TimerScript>().seconds + (timerObj.GetComponent<TimerScript>().deciseconds*0.01f)));
+
+            periodScale = (maxPeriod - ((maxPeriod - minperiod) / timeToStartIncreasingPitch) * (timerObj.GetComponent<TimerScript>().seconds + (timerObj.GetComponent<TimerScript>().deciseconds * 0.01f)));
+            foreach (GameObject o in redLights)
+            {
+                o.GetComponent<Light>().range = Mathf.Sin(/*Time.time **/ periodScale) * 0.25f + 0.1f;
+            }
         }
         else
         {
             bgm.pitch = 1.0f;
+            foreach (GameObject o in redLights)
+            {
+                o.GetComponent<Light>().range = 0.1f;
+            }
         }
     }
+
+    //void FlashRed()
+    //{
+    //    if ()
+        
+    //}
 
 }
